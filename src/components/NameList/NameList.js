@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NameItem from '../NameItem/NameItem';
 import styles from './nameList.module.css';
-import * as actions from '../../redux/phonebook-action';
+import actions from '../../redux/phonebook-action';
 import { connect } from 'react-redux';
 
 const NameList = ({ visibleContacts, onDeleteContact }) => (
