@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './form.module.css';
-import * as actions from '../../redux/phonebook-action';
+import actions from '../../redux/phonebook-action';
 import { connect } from 'react-redux';
 
 function Form({ onSubmit }) {
