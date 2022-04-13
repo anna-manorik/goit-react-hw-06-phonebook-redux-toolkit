@@ -1,17 +1,16 @@
-export const addContact = (name, number) => ({
-  type: 'ADD_CONTACT',
-  payload: {
-    name: name,
-    number: number,
-  },
+import { createAction } from '@reduxjs/toolkit';
+
+const addContact = createAction('ADD_CONTACT', (name, number) => {
+  return {
+    payload: {
+      name: name,
+      number: number,
+    },
+  };
 });
 
-export const deleteContact = id => ({
-  type: 'DELETE_CONTACT',
-  payload: id,
-});
+const deleteContact = createAction('DELETE_CONTACT');
 
-export const changeFilter = value => ({
-  type: 'CHANGE_FILTER',
-  payload: value,
-});
+const changeFilter = createAction('CHANGE_FILTER');
+
+export default { addContact, deleteContact, changeFilter };
