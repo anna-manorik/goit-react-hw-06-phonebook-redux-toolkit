@@ -21,15 +21,12 @@ const contactReduser = createReducer([], {
     }
   },
   [actions.deleteContact]: (state, { payload }) => {
-    
     return state.filter(contact => contact.id !== payload);
   },
 });
 
 const filterReduser = createReducer('', {
-  [actions.changeFilter]: (state, {payload}) => {
-    console.log('state filter', state);
-    console.log('state payload', payload);
+  [actions.changeFilter]: (state, { payload }) => {
     return payload;
   },
 });
