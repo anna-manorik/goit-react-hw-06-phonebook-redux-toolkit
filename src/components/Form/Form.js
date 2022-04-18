@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './form.module.css';
 import actions from '../../redux/phonebook-action';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-function Form({ onSubmit }) {
+const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -28,7 +30,7 @@ function Form({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit(name, number);
+    dispatch(actions.addContact(name, number))
     resetForm();
 
     e.currentTarget.elements.name.value = '';
@@ -79,8 +81,4 @@ Form.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) => dispatch(actions.addContact(name, number)),
-});
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;
