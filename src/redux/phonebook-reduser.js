@@ -1,4 +1,15 @@
 import { configureStore, createReducer } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import actions from './phonebook-action';
 import shortid from 'shortid';
 
@@ -31,11 +42,27 @@ const filterReduser = createReducer('', {
   },
 });
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  timeout: null,
+};
+
+const persistedReducer = persistReducer(persistConfig, contactReduser);
+
 const store = configureStore({
   reducer: {
-    contactReduser,
+    contactReduser: persistedReducer,
     filterReduser,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-export default store;
+const persistor = persistStore(store);
+
+export default {store, persistor};
