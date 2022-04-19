@@ -22,12 +22,4 @@ Filter.propTypes = {
   changeFilter: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   filterValue: state.filterReduser,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   changeFilter: e => dispatch(actions.changeFilter(e.target.value)),
-// });
-
 export default Filter;
