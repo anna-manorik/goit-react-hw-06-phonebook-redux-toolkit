@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styles from './form.module.css';
 import actions from '../../redux/phonebook-action';
 import { useDispatch } from 'react-redux';
+import { store } from '../../redux/store';
 
 const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -30,11 +30,22 @@ const Form = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(actions.addContact(name, number))
-    resetForm();
+    const contactReduser = store.getState().rootReduser.contactReduser;
+    console.log(contactReduser);
 
-    e.currentTarget.elements.name.value = '';
-    e.currentTarget.elements.number.value = '';
+    const checkname = contactReduser.find(contact =>
+      contact.name.toLowerCase().includes(e.currentTarget.elements.name.value.toLowerCase())
+    );
+
+    if (!checkname) {
+      dispatch(actions.addContact({ name, number }));
+      resetForm();
+
+      e.currentTarget.elements.name.value = '';
+      e.currentTarget.elements.number.value = '';
+    } else {
+      alert(e.currentTarget.elements.name.value + ' is already in contact list');
+    }
   };
 
   const resetForm = () => {
@@ -75,7 +86,7 @@ const Form = () => {
       </button>
     </form>
   );
-}
+};
 
 Form.propTypes = {
   onSubmit: PropTypes.func,
