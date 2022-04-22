@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const addContact = createAction('ADD_CONTACT', (name, number) => {
+const addContact = createAction('ADD_CONTACT', ({ name, number }) => {
   return {
     payload: {
       name: name,
