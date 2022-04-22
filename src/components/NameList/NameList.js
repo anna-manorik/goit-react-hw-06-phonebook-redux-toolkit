@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import NameItem from '../NameItem/NameItem';
 import styles from './nameList.module.css';
 import actions from '../../redux/phonebook-action';
+import { getVisibleContacts } from '../../redux/phonebook-selectors';
 import { useSelector, useDispatch } from 'react-redux';
 
 const NameList = () => {
@@ -25,18 +26,6 @@ const NameList = () => {
     </ul>
   );
 };
-
-function getVisibleContacts({ contactReduser, filterReduser }) {
-  // console.log(filterReduser);
-  console.log(contactReduser);
-
-    return contactReduser.filter(contact =>
-      contact.name.toLowerCase().includes(filterReduser.toLowerCase())
-    );
-  
-    
-  
-}
 
 NameList.propTypes = {
   visibleContacts: PropTypes.array,
